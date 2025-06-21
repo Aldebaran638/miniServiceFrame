@@ -16,12 +16,6 @@ public class GatewayApplication {
 		SpringApplication.run(GatewayApplication.class, args);
 	}
 
-	/*
-	 * 当向 /get 发起请求时，
-	 * 该路由会将请求转发到 https://httpbin.org/get
-	 * 在我们对这个路由的配置中，我们添加了一个过滤器
-	 * 在请求被转发之前，会向请求中添加一个值为 World 的 Hello 请求头
-	 */
 	@Bean
 	public RouteLocator myRoutes(RouteLocatorBuilder builder) {
 		return builder.routes()
