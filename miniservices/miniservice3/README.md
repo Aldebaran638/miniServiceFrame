@@ -289,7 +289,7 @@ public @ResponseBody Map<String, Object> getUserWithTelAndHistory(@PathVariable 
 
 输出：
 ```bash
-
+Saved
 ```
 
 - 查询基础用户信息
@@ -299,7 +299,19 @@ public @ResponseBody Map<String, Object> getUserWithTelAndHistory(@PathVariable 
 
 输出：
 ```bash
-
+{
+  "address":
+    {
+      "zipcode":"100080",
+      "city":"Beijing",
+      "street":"zhongguancun"
+    },
+  "profile":"student",
+  "name":"zhangsan",
+  "id":1,
+  "email":"zhangsan@example.com",
+  "age":20
+}
 ```
 
 - 查询基础信息+电话
@@ -307,10 +319,23 @@ public @ResponseBody Map<String, Object> getUserWithTelAndHistory(@PathVariable 
 指令：
   `curl http://localhost:8080/demo/user/1/tel`
 
-
 输出：
 ```bash
-
+{
+  "address":
+    {
+      "zipcode":"100080",
+      "city":"Beijing",
+      "street":"zhongguancun"
+    },
+  "profile":"student",
+  "name":"zhangsan",
+  "tel":"mock-tel-123456",
+  "id":1,
+  "history":"mock-history",
+  "email":"zhangsan@example.com",
+  "age":20
+}
 ```
 
 - 查询基础信息+电话+历史
@@ -320,5 +345,19 @@ public @ResponseBody Map<String, Object> getUserWithTelAndHistory(@PathVariable 
 
 输出：
 ```bash
-
+{
+  "address":
+    {
+      "zipcode":"100080",
+      "city":"Beijing",
+      "street":"zhongguancun"
+    },
+  "profile":"student",
+  "name":"zhangsan",
+  "tel":"mock-tel-123456",
+  "id":1,
+  "history":"mock-history",
+  "email":"zhangsan@example.com",
+  "age":20
+}
 ```
