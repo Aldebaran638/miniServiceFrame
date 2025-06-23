@@ -16,7 +16,7 @@ import com.miniprogram_frame.miniservice3.user.domain.User;
 import com.miniprogram_frame.miniservice3.user.repository.UserRepository;
 
 @Controller
-@RequestMapping(path = "/demo")
+@RequestMapping(path = "/user")
 public class UserController {
 
   @Autowired

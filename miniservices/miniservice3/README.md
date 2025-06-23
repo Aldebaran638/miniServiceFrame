@@ -298,7 +298,7 @@ public @ResponseBody Map<String, Object> getUserWithTelAndHistory(@PathVariable 
 
 指令：
 
-  `curl http://localhost:8080/demo/add -d name=zhangsan -d email=zhangsan@example.com -d age=20 -d profile=student -d city=Beijing -d street=zhongguancun -d zipcode=100080`
+  `curl http://localhost:8080/demo/add -d name=zhangsan -d email=zhangsan@example.com -d age=20 -d profile=student -d city=Beijing -d street=zhongguancun -d zipcode=100080 -d Sex=FEMALE`
 
 输出：
 ```bash
