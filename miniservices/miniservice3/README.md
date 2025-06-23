@@ -278,3 +278,47 @@ public @ResponseBody Map<String, Object> getUserWithTelAndHistory(@PathVariable 
   return query.query(id);
 }
 ```
+
+# 7.示例访问数据（URL）
+
+- 新增用户（POST）
+
+指令：
+
+  `curl http://localhost:8080/demo/add -d name=zhangsan -d email=zhangsan@example.com -d age=20 -d profile=student -d city=Beijing -d street=zhongguancun -d zipcode=100080`
+
+输出：
+```bash
+
+```
+
+- 查询基础用户信息
+
+指令：
+  `curl http://localhost:8080/demo/user/1`
+
+输出：
+```bash
+
+```
+
+- 查询基础信息+电话
+
+指令：
+  `curl http://localhost:8080/demo/user/1/tel`
+
+
+输出：
+```bash
+
+```
+
+- 查询基础信息+电话+历史
+
+指令：
+  `curl http://localhost:8080/demo/user/1/tel/history`
+
+输出：
+```bash
+
+```

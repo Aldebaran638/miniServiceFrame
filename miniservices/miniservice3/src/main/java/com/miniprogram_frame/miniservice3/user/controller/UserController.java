@@ -36,7 +36,7 @@ public class UserController {
             .Street(street)
             .Zipcode(zipcode));
     userRepository.save(n);
-    return "Saved";
+    return "Saved\n";
   }
 
   @GetMapping(path = "/all")
