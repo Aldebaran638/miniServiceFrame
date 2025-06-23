@@ -13,7 +13,7 @@
 
 本微服务提供任务的增删改查接口，并支持按状态、优先级等条件查询。
 
-# 2.静态工厂设计模式+枚举类编写领域模型
+# 2.静态工厂设计模式+枚举类+限制符编码方式编写领域模型
 
 ## (1).TaskStatus与TaskPriority枚举
 
@@ -27,7 +27,7 @@ public enum TaskPriority {
 }
 ```
 
-## (2).Task领域模型
+## (2).Task领域模型（限制符编码方式）
 
 ```java
 @Entity
@@ -40,8 +40,11 @@ public class Task {
   private TaskStatus status;
   private TaskPriority priority;
   private LocalDateTime createdAt;
-  // ...getter/setter均为private，体现限制符编码技巧
-  // ...省略构造方法
+  // 所有字段均为private，体现封装性
+  // ...getter/setter均为public
+  // 构造方法为private，仅允许工厂创建
+  private Task() {}
+  // ...省略getter/setter...
 }
 ```
 
@@ -60,6 +63,14 @@ public class TaskFactory {
   }
 }
 ```
+
+## (4).泛型限制符的实际应用
+
+```java
+// TaskService接口
+<T extends Comparable<? super T>> List<Task> findTopNTasks(List<Task> tasks, int n);
+```
+该方法通过泛型上界限制，保证传入的类型T必须具备可比较性，体现了类型安全和灵活性。
 
 # 3.Service层用Stream流+Lambda表达式
 
