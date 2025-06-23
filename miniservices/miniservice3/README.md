@@ -1,4 +1,4 @@
-本微服务使用转发类，也就是装饰器模式（Decorator Pattern），和builder设计模式，完成了极简的，可拓展性强的用户信息查询接口。
+本微服务使用转发类，也就是装饰器模式（Decorator Pattern）、builder设计模式和枚举类完成了极简的，可拓展性强的用户信息查询接口。
 
 具体实现如下：
 
@@ -17,7 +17,7 @@
 - HistoryUserQuery：模拟查询用户信息的第二个模块，可以查询history一种信息
 - TelUserQuery：模拟查询用户信息的第三个模块，可以查询tel一种信息。
 
-# 2.builder设计模式编写领域模型
+# 2.builder设计模式+枚举类（用于定义Sex字段）编写领域模型
 
 ## (1).Address领域模型（为User类的一个字段）
 
@@ -34,7 +34,7 @@ public class Address {
   public Address Zipcode(String zipcode) {this.zipcode = zipcode;return this;}
 }
 ```
-## (2).User领域模型（为User类的一个字段）
+## (2).User领域模型
 
 ### 核心代码
 ```java
@@ -50,6 +50,7 @@ public class User {
   @Embedded
   private Address address;
   private String profile;
+  private Sex sex;
 
   // builder风格方法
   public User Name(String name) {this.name = name;return this;}
@@ -57,6 +58,7 @@ public class User {
   public User Age(Integer age) {this.age = age;return this;}
   public User Address(Address address) {this.address = address;return this;}
   public User Profile(String profile) {this.profile = profile;return this;}
+  public User Sex(Sex sex) {this.sex = sex;return this;}
 }
 ```
 
@@ -93,6 +95,17 @@ public class SimpleUserQuery implements UserQuery {
       result.put("id", user.getId());
       result.put("name", user.getName());
       result.put("email", user.getEmail());
+      result.put("age", user.getAge());
+      result.put("profile", user.getProfile());
+      result.put("sex", user.getSex() != null ? user.getSex().name() : null);
+      Address address = user.getAddress();
+      if (address != null) {
+        Map<String, Object> addressMap = new HashMap<>();
+        addressMap.put("city", address.getCity());
+        addressMap.put("street", address.getStreet());
+        addressMap.put("zipcode", address.getZipcode());
+        result.put("address", addressMap);
+      }
     }
     return result;
   }
@@ -101,7 +114,7 @@ public class SimpleUserQuery implements UserQuery {
 
 ### 功能
 
-查询用户基础信息（id、name、email）。
+查询用户基础信息（id、name、email等）。
 
 ## (3).HistoryUserQuery
 

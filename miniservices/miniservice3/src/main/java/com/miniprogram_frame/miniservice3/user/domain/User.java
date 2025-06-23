@@ -18,6 +18,7 @@ public class User {
   @Embedded
   private Address address;
   private String profile;
+  private Sex sex;
 
   public Integer getId() {
     return id;
@@ -67,6 +68,14 @@ public class User {
     this.profile = profile;
   }
 
+  public Sex getSex() {
+    return sex;
+  }
+
+  public void setSex(Sex sex) {
+    this.sex = sex;
+  }
+
   // builder风格方法
   public User Name(String name) {
     this.name = name;
@@ -91,5 +100,14 @@ public class User {
   public User Profile(String profile) {
     this.profile = profile;
     return this;
+  }
+
+  public User Sex(Sex sex) {
+    this.sex = sex;
+    return this;
+  }
+
+  public static enum Sex {
+    MALE, FEMALE, OTHER;
   }
 }

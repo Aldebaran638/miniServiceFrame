@@ -25,12 +25,14 @@ public class UserController {
   @PostMapping(path = "/add")
   public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String email,
       @RequestParam Integer age, @RequestParam String profile,
-      @RequestParam String city, @RequestParam String street, @RequestParam String zipcode) {
+      @RequestParam String city, @RequestParam String street, @RequestParam String zipcode,
+      @RequestParam String sex) {
     User n = new User()
         .Name(name)
         .Email(email)
         .Age(age)
         .Profile(profile)
+        .Sex(User.Sex.valueOf(sex))
         .Address(new Address()
             .City(city)
             .Street(street)

@@ -26,6 +26,7 @@ public class SimpleUserQuery implements UserQuery {
       result.put("email", user.getEmail());
       result.put("age", user.getAge());
       result.put("profile", user.getProfile());
+      result.put("sex", user.getSex() != null ? user.getSex().name() : null);
       Address address = user.getAddress();
       if (address != null) {
         Map<String, Object> addressMap = new HashMap<>();
