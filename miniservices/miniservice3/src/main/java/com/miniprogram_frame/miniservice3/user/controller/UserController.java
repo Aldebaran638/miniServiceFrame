@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.miniprogram_frame.miniservice3.user.domain.Address;
 import com.miniprogram_frame.miniservice3.user.domain.User;
 import com.miniprogram_frame.miniservice3.user.repository.UserRepository;
 
@@ -22,10 +23,18 @@ public class UserController {
   private UserRepository userRepository;
 
   @PostMapping(path = "/add")
-  public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String email) {
-    User n = new User();
-    n.setName(name);
-    n.setEmail(email);
+  public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String email,
+      @RequestParam Integer age, @RequestParam String profile,
+      @RequestParam String city, @RequestParam String street, @RequestParam String zipcode) {
+    User n = new User()
+        .Name(name)
+        .Email(email)
+        .Age(age)
+        .Profile(profile)
+        .Address(new Address()
+            .City(city)
+            .Street(street)
+            .Zipcode(zipcode));
     userRepository.save(n);
     return "Saved";
   }
@@ -37,25 +46,23 @@ public class UserController {
 
   @GetMapping(path = "/user/{id}")
   public @ResponseBody Map<String, Object> getUser(@PathVariable Integer id) {
-    com.miniprogram_frame.miniservice3.user.query.UserQuery query =
-        new com.miniprogram_frame.miniservice3.user.query.SimpleUserQuery(userRepository);
+    com.miniprogram_frame.miniservice3.user.query.UserQuery query = new com.miniprogram_frame.miniservice3.user.query.SimpleUserQuery(
+        userRepository);
     return query.query(id);
   }
 
   @GetMapping(path = "/user/{id}/tel")
   public @ResponseBody Map<String, Object> getUserWithTel(@PathVariable Integer id) {
-    com.miniprogram_frame.miniservice3.user.query.UserQuery query =
-        new com.miniprogram_frame.miniservice3.user.query.TelUserQuery(
-            new com.miniprogram_frame.miniservice3.user.query.SimpleUserQuery(userRepository));
+    com.miniprogram_frame.miniservice3.user.query.UserQuery query = new com.miniprogram_frame.miniservice3.user.query.TelUserQuery(
+        new com.miniprogram_frame.miniservice3.user.query.SimpleUserQuery(userRepository));
     return query.query(id);
   }
 
   @GetMapping(path = "/user/{id}/tel/history")
   public @ResponseBody Map<String, Object> getUserWithTelAndHistory(@PathVariable Integer id) {
-    com.miniprogram_frame.miniservice3.user.query.UserQuery query =
-        new com.miniprogram_frame.miniservice3.user.query.HistoryUserQuery(
-            new com.miniprogram_frame.miniservice3.user.query.TelUserQuery(
-                new com.miniprogram_frame.miniservice3.user.query.SimpleUserQuery(userRepository)));
+    com.miniprogram_frame.miniservice3.user.query.UserQuery query = new com.miniprogram_frame.miniservice3.user.query.HistoryUserQuery(
+        new com.miniprogram_frame.miniservice3.user.query.TelUserQuery(
+            new com.miniprogram_frame.miniservice3.user.query.SimpleUserQuery(userRepository)));
     return query.query(id);
   }
 }

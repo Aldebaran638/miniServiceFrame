@@ -1,11 +1,12 @@
 package com.miniprogram_frame.miniservice3.user.query;
 
-import com.miniprogram_frame.miniservice3.user.domain.User;
-import com.miniprogram_frame.miniservice3.user.repository.UserRepository;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+
+import com.miniprogram_frame.miniservice3.user.domain.Address;
+import com.miniprogram_frame.miniservice3.user.domain.User;
+import com.miniprogram_frame.miniservice3.user.repository.UserRepository;
 
 public class SimpleUserQuery implements UserQuery {
   private final UserRepository userRepository;
@@ -23,6 +24,16 @@ public class SimpleUserQuery implements UserQuery {
       result.put("id", user.getId());
       result.put("name", user.getName());
       result.put("email", user.getEmail());
+      result.put("age", user.getAge());
+      result.put("profile", user.getProfile());
+      Address address = user.getAddress();
+      if (address != null) {
+        Map<String, Object> addressMap = new HashMap<>();
+        addressMap.put("city", address.getCity());
+        addressMap.put("street", address.getStreet());
+        addressMap.put("zipcode", address.getZipcode());
+        result.put("address", addressMap);
+      }
     }
     return result;
   }
