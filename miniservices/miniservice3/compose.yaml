@@ -8,5 +8,5 @@ services:
       - 'MYSQL_ROOT_PASSWORD=12356'
       - 'MYSQL_USER=admin'
     ports:
-      - '3306:3307'
-      - '33060:33070'
+      - '3307:3306'
+      - '33070:33060'

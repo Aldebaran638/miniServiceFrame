@@ -298,7 +298,7 @@ public @ResponseBody Map<String, Object> getUserWithTelAndHistory(@PathVariable 
 
 指令：
 
-  `curl http://localhost:8080/demo/add -d name=zhangsan -d email=zhangsan@example.com -d age=20 -d profile=student -d city=Beijing -d street=zhongguancun -d zipcode=100080 -d Sex=FEMALE`
+  `curl http://localhost:8080/user/add -d name=zhangsan -d email=zhangsan@example.com -d age=20 -d profile=student -d city=Beijing -d street=zhongguancun -d zipcode=100080 -d sex=FEMALE`
 
 输出：
 ```bash
@@ -308,7 +308,7 @@ Saved
 - 查询基础用户信息
 
 指令：
-  `curl http://localhost:8080/demo/user/1`
+  `curl http://localhost:8080/user/user/1`
 
 输出：
 ```bash
@@ -320,6 +320,7 @@ Saved
       "street":"zhongguancun"
     },
   "profile":"student",
+  "sex":"FEMALE",
   "name":"zhangsan",
   "id":1,
   "email":"zhangsan@example.com",
@@ -330,7 +331,7 @@ Saved
 - 查询基础信息+电话
 
 指令：
-  `curl http://localhost:8080/demo/user/1/tel`
+  `curl http://localhost:8080/user/user/1/tel`
 
 输出：
 ```bash
@@ -342,6 +343,7 @@ Saved
       "street":"zhongguancun"
     },
   "profile":"student",
+  "sex":"FEMALE",
   "name":"zhangsan",
   "tel":"mock-tel-123456",
   "id":1,
@@ -354,7 +356,7 @@ Saved
 - 查询基础信息+电话+历史
 
 指令：
-  `curl http://localhost:8080/demo/user/1/tel/history`
+  `curl http://localhost:8080/user/user/1/tel/history`
 
 输出：
 ```bash
@@ -366,6 +368,7 @@ Saved
       "street":"zhongguancun"
     },
   "profile":"student",
+  "sex":"FEMALE",
   "name":"zhangsan",
   "tel":"mock-tel-123456",
   "id":1,
